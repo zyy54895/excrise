@@ -66,6 +66,8 @@ print('在%s' %hours_value, '点到%s' % (hours_value+1), '点发布的数据最
 
 date_user_source = list(zip([username_unset[i][1:-1] for i in range(len(username_unset))], [lines_from_created_at_source[j][1:11] for j in range(len(lines_from_created_at_source))])) #建立（用户名，日期）列表
 date_uesr_error = [x for x in range(len(date_user_source)) if isVaildDate(date_user_source[x][1]) == False] #找出错误日期index
-date_users = [date_user_source[x] for x in range(len(date_user_source)) if not x in date_uesr_error]   #去除错误的日期
-
+date_users_tuple = [date_user_source[x] for x in range(len(date_user_source)) if not x in date_uesr_error]   #去除错误的日期
+date_users_dict = {}
+# for i in range(len(date_users_tuple)):
+#      if date_users_tuple[i][1] in date_users_dict.keys():
 
