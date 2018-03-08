@@ -68,6 +68,13 @@ date_user_source = list(zip([username_unset[i][1:-1] for i in range(len(username
 date_uesr_error = [x for x in range(len(date_user_source)) if isVaildDate(date_user_source[x][1]) == False] #找出错误日期index
 date_users_tuple = [date_user_source[x] for x in range(len(date_user_source)) if not x in date_uesr_error]   #去除错误的日期
 date_users_dict = {}
-# for i in range(len(date_users_tuple)):
-#      if date_users_tuple[i][1] in date_users_dict.keys():
+#找出出现的日期数
+dates = list(set([date_users_tuple[x][1] for x in range(len(date_users_tuple))]))
+# users = [date_users_tuple[x][0].join(date_users_tuple[x][1]) for x in range(len(date_users_tuple))]
+
+for i in dates:
+    if not i in date_users_dict.keys():
+        date_users_dict[i] = {}
+
+# for i in date_users_dict.keys():
 
