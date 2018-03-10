@@ -70,11 +70,36 @@ date_users_tuple = [date_user_source[x] for x in range(len(date_user_source)) if
 date_users_dict = {}
 #找出出现的日期数
 dates = list(set([date_users_tuple[x][1] for x in range(len(date_users_tuple))]))
-# users = [date_users_tuple[x][0].join(date_users_tuple[x][1]) for x in range(len(date_users_tuple))]
 
-for i in dates:
-    if not i in date_users_dict.keys():
-        date_users_dict[i] = {}
+def find_max_user(date, *input_list):        #找出在某一天发表最多的用户
+    division_list = [input_list[x][0] for x in range(len(input_list)) if input_list[x][1] == date]
+    division_dict = {}
+    for i in division_list[:]:
+        if i in division_dict.keys():
+            division_dict[i] += 1
+        else:
+            division_dict[i] = 1
+    max = 0
+    for j in division_dict.keys():
+        if division_dict[j] > max:
+            max = division_dict[j]
+            username = j
+    return username
 
-# for i in date_users_dict.keys():
+for i in dates[:]:
+    date_users_dict[i] = find_max_user(i, *date_users_tuple)
 
+#7. 请按照时间顺序输出 2012-11-03 每个小时的发布tweets的频率（要求：输出为一个list [(1,20),(2,30)] 代表1点发了20个tweets，2点发了30个tweets）
+
+date_time_2012_11_03 = [date_time[x] for x in range(len(date_time)) if date_time[x][0:10] == '2012-11-03']  #找出所有11月3日的发布时间
+
+def count_time(hour, *input_list):
+    num = 0
+    for i in range(len(input_list)):
+        if int(input_list[i][11:13]) == hour:
+            num += 1
+    return (hour, num)
+
+list_2012_11_03 = [count_time(i, *date_time_2012_11_03) for i in range(0, 24)]
+
+#8. 统计该文本里，来源的相关信息和次数，比如（输出一个list。例如[('Twitter for Android',1),('TweetList!',1)]）
