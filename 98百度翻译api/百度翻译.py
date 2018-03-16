@@ -47,35 +47,35 @@ root.title('翻译')
 from_test = StringVar()
 to_test = StringVar()
 
-Label(root, text='输入词汇').grid(row=0, column=0)
-Label(root, text='翻译词汇').grid(row=1, column=0)
+Label(root, text='输入词汇', font=("Helvetica", 12, "normal")).grid(row=0, column=0)
+Label(root, text='翻译词汇', font=("Helvetica", 12, "normal")).grid(row=1, column=0)
 
-l1 = Label(root, textvariable=from_test, width=3)     #创建标签
+l1 = Label(root, textvariable=from_test, width=3, font=("Helvetica", 12, "normal"))     #创建标签
 l1.grid(row=0, column=3)
 from_test.set('en')
 
-l2 = Label(root, textvariable=to_test, width=3)
+l2 = Label(root, textvariable=to_test, width=3, font=("Helvetica", 12, "normal"))
 l2.grid(row=1, column=3)
 to_test.set('zh')
 
 source_text = StringVar()                        #创建输入框
-source = Entry(root, textvariable=source_text, width=30)
+source = Entry(root, textvariable=source_text, width=30, font=("Helvetica", 12, "normal"))
 source_text.set(' ')
 source.grid(row=0, column=1)
 
 result_text = StringVar()                       #创建翻译窗口
-result = Entry(root, textvariable=result_text, width=30)
+result = Entry(root, textvariable=result_text, width=30, font=("Helvetica", 12, "normal"))
 result.grid(row=1, column=1)
 result['state'] = 'readonly'
 
 chosen_text1 = StringVar()
-chosen1 = ttk.Combobox(root, width=7, textvariable=chosen_text1)
+chosen1 = ttk.Combobox(root, width=8, textvariable=chosen_text1, font=("Helvetica", 12, "normal"))
 chosen1['values'] = ('自动检测', '中文', '英语', '粤语', '文言文', '日语', '韩语', '俄语', '德语', '繁体中文')
 chosen1.grid(row=0, column=2)
 chosen1.current(0)
 
 chosen_text2 = StringVar()
-chosen2 = ttk.Combobox(root, width=7, textvariable=chosen_text2)
+chosen2 = ttk.Combobox(root, width=8, textvariable=chosen_text2, font=("Helvetica", 12, "normal"))
 chosen2['values'] = ('中文', '英语', '粤语', '文言文', '日语', '韩语', '俄语', '德语', '繁体中文')
 chosen2.grid(row=1, column=2)
 chosen2.current(0)
@@ -98,7 +98,7 @@ def on_click():
 
 
 
-Button(root, text="翻译", command=on_click, width=15).grid(row=2, column=1)   #创建按钮
+Button(root, text="翻译", command=on_click, width=15, font=("Helvetica", 12, "normal")).grid(row=2, column=1)   #创建按钮
 
 root.mainloop()
 
