@@ -1,6 +1,6 @@
 # conding=utf-8
 
-#一、多进程
+#多进程
 #1.使用os模块中的fork方式实现多进程
 ##fork方法是调用一次，返回两次，操作系统将当前进程（父进程）复制出一份子进程，这两个进程几乎完全相同。子进程中永远返回0，父进程返回子进程的id
 import os
@@ -93,13 +93,13 @@ if __name__ == '__main__':
     proc_writer2.join()
     #proc_reader进程里是死循环，只能强行终止
     proc_reader.terminate()
-
-##Pipe通信
-
-##Pipe常用来在两个进程间进行通信，两个进程分别位于管道的两端
-###Pipe返回（conn1,conn2),有duplex参数，若为True，代表管道为全双工模式,conn1,conn2均可收发;若为False,conn1负责接收消息,conn2负责发送消息
-###send和recv为发送和接收消息的方法
-
+#
+# ##Pipe通信
+#
+# ##Pipe常用来在两个进程间进行通信，两个进程分别位于管道的两端
+# ###Pipe返回（conn1,conn2),有duplex参数，若为True，代表管道为全双工模式,conn1,conn2均可收发;若为False,conn1负责接收消息,conn2负责发送消息
+# ###send和recv为发送和接收消息的方法
+#
 import multiprocessing
 import random
 import time,os
@@ -123,3 +123,6 @@ if __name__ == '__main__':
     p2.start()
     p1.join()
     p2.terminate()
+
+
+
