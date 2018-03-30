@@ -1,53 +1,53 @@
 # conding=utf-8
 
-#多进程
-#1.使用os模块中的fork方式实现多进程
-##fork方法是调用一次，返回两次，操作系统将当前进程（父进程）复制出一份子进程，这两个进程几乎完全相同。子进程中永远返回0，父进程返回子进程的id
-import os
-if __name__ == '__main__':
-    print('currnet Process (%s) start...'%(os.getpid()))
-    pid = os.fork()
-    if pid < 0:
-        print('error in fork')
-    elif pid == 0:
-        print('i am a child process(%s) and my parent process is(%s)' % (os.getpid(), os.getppid()))
-    else:
-        print('I(%s) created a child process(%s).' % (os.getpid(), pid))
-
-#2.使用multiprocessing模块创建多进程
-
-import os
-from multiprocessing import Process
-# 子进程要执行的代码
-def run_proc(name):
-    print('child process %s (%s) running...' % (name, os.getpid()))
-if __name__ == '__main__':
-    print('parent process %s' % os.getpid())
-    for i in range(5):
-        p = Process(target=run_proc, args=(str(i), ))
-        print('process will start.')
-        p.start()
-    p.join()
-    print('process end')
-
-#3.multiprocessing提供了一个Pool类来代表进程池对象
-from multiprocessing import Pool
-import os, time, random
-
-def run_task(name):
-    print('task %s (pid=%s) is running...' % (name, os.getpid()))
-    time.sleep(random.random()*3)
-    print('task %s end.' % name)
-
-if __name__ == '__main__':
-    print('current process %s' % os.getpid())
-    p = Pool(processes=3)
-    for i in range(5):
-        p.apply_async(run_task, args=(i, ))
-    print('waiting for all subprocesses done...')
-    p.close()
-    p.join()
-    print('all subprocesses done.')
+# #多进程
+# #1.使用os模块中的fork方式实现多进程
+# ##fork方法是调用一次，返回两次，操作系统将当前进程（父进程）复制出一份子进程，这两个进程几乎完全相同。子进程中永远返回0，父进程返回子进程的id
+# import os
+# if __name__ == '__main__':
+#     print('currnet Process (%s) start...'%(os.getpid()))
+#     pid = os.fork()
+#     if pid < 0:
+#         print('error in fork')
+#     elif pid == 0:
+#         print('i am a child process(%s) and my parent process is(%s)' % (os.getpid(), os.getppid()))
+#     else:
+#         print('I(%s) created a child process(%s).' % (os.getpid(), pid))
+#
+# #2.使用multiprocessing模块创建多进程
+#
+# import os
+# from multiprocessing import Process
+# # 子进程要执行的代码
+# def run_proc(name):
+#     print('child process %s (%s) running...' % (name, os.getpid()))
+# if __name__ == '__main__':
+#     print('parent process %s' % os.getpid())
+#     for i in range(5):
+#         p = Process(target=run_proc, args=(str(i), ))
+#         print('process will start.')
+#         p.start()
+#     p.join()
+#     print('process end')
+#
+# #3.multiprocessing提供了一个Pool类来代表进程池对象
+# from multiprocessing import Pool
+# import os, time, random
+#
+# def run_task(name):
+#     print('task %s (pid=%s) is running...' % (name, os.getpid()))
+#     time.sleep(random.random()*3)
+#     print('task %s end.' % name)
+#
+# if __name__ == '__main__':
+#     print('current process %s' % os.getpid())
+#     p = Pool(processes=3)
+#     for i in range(5):
+#         p.apply_async(run_task, args=(i, ))
+#     print('waiting for all subprocesses done...')
+#     p.close()
+#     p.join()
+#     print('all subprocesses done.')
 
 ##tips:
 ###Pool对象调用join()方法会等待所有子进程执行完毕，调用jion()之前必须先调用close（），调用close()之后就不能添加新的Process了

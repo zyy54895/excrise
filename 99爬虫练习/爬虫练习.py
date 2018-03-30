@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # def get_html(url, headers, proxies):
@@ -10,7 +9,7 @@ import requests
 headers = {'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
 proxies = {"https": "https://61.135.217.7:80"}
 try:
-    html = requests.get('http://www.xicidaili.com/nn', headers=headers, proxies=proxies).text
+    html = requests.get('http://www.xicidaili.com/nn', headers=headers).text
 except:
     html = 'error'
 
