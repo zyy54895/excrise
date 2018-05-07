@@ -16,38 +16,39 @@
 #
 # #2.使用multiprocessing模块创建多进程
 #
-# import os
-# from multiprocessing import Process
-# # 子进程要执行的代码
-# def run_proc(name):
-#     print('child process %s (%s) running...' % (name, os.getpid()))
-# if __name__ == '__main__':
-#     print('parent process %s' % os.getpid())
-#     for i in range(5):
-#         p = Process(target=run_proc, args=(str(i), ))
-#         print('process will start.')
-#         p.start()
-#     p.join()
-#     print('process end')
+import os
+from multiprocessing import Process
+# 子进程要执行的代码
+def run_proc(name):
+    print('child process %s (%s) running...' % (name, os.getpid()))
+if __name__ == '__main__':
+    print('parent process %s' % os.getpid())
+    for i in range(5):
+        p = Process(target=run_proc, args=(str(i), ))
+        print('process will start.')
+        p.start()
+    p.join()
+    print('process end')
 #
 # #3.multiprocessing提供了一个Pool类来代表进程池对象
-# from multiprocessing import Pool
-# import os, time, random
-#
-# def run_task(name):
-#     print('task %s (pid=%s) is running...' % (name, os.getpid()))
-#     time.sleep(random.random()*3)
-#     print('task %s end.' % name)
-#
-# if __name__ == '__main__':
-#     print('current process %s' % os.getpid())
-#     p = Pool(processes=3)
-#     for i in range(5):
-#         p.apply_async(run_task, args=(i, ))
-#     print('waiting for all subprocesses done...')
-#     p.close()
-#     p.join()
-#     print('all subprocesses done.')
+from multiprocessing import Pool
+import os, time, random
+
+def run_task(name):
+    print('task %s (pid=%s) is running...' % (name, os.getpid()))
+    time.sleep(random.random()*3)
+    print('task %s end.' % name)
+
+if __name__ == '__main__':
+    print('current process %s' % os.getpid())
+    p = Pool(processes=3)
+    for i in range(5):
+        p.apply_async(run_task, args=(i, ))
+    print('waiting for all subprocesses done...')
+    p.close()
+    p.join()
+    print('all subprocesses done.')
+
 
 ##tips:
 ###Pool对象调用join()方法会等待所有子进程执行完毕，调用jion()之前必须先调用close（），调用close()之后就不能添加新的Process了
